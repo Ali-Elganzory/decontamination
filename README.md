@@ -10,14 +10,15 @@ An n-gram based decontamination tool for LLM training datasets.
 uv pip install https://github.com/ali-elganzory/decontamination.git
 ```
 
-# Usage
+# CLI
+
+## Configuration
 
 All commands can be configured using either:
-- command arguments. Check
-  - `es --help`
-  - `ds --help`
-  - `ds remove --help`
-- a YAML config file with the `--config <config_file>` argument. Check
+1. command arguments. Check
+  - `es [subcommand] --help`
+  - `ds [subcommand] --help`
+2. a YAML config file with the `--config <config_file>` argument. Check
   - `configs/es/build.yaml`
   - `configs/es/prepare.yaml`
   - `configs/es/run.yaml`
@@ -25,7 +26,17 @@ All commands can be configured using either:
   - `configs/ds/search.yaml`
   - `configs/ds/remove.yaml`
 
-### 1. Run `elasticsearch` container
+## Autocompletion
+
+To enable autocompletion for the CLI, run the following commands:
+```bash
+es --install-completion [bash|zsh|fish]
+ds --install-completion [bash|zsh|fish]
+```
+
+# Usage
+
+## 1. Run `elasticsearch` container
 
 ```bash
 es build         # Build an Elasticsearch apptainer image
@@ -35,7 +46,7 @@ es run           # Run the Elasticsearch container
 
 Elasticsearch is used as a search engine to efficiently index the training datasets and perform n-gram search for overlap with evaluation benchmarks.  
 
-### 2. Index datasets into Elasticsearch
+## 2. Index datasets into Elasticsearch
 
 ```bash
 ds index
@@ -51,7 +62,7 @@ The datasets to be indexed are specified in the YAML config file (check `configs
   ...
 ```
 
-### 3. Find contaminated samples
+## 3. Find contaminated samples
 
 ```bash
 ds search
@@ -69,10 +80,10 @@ The benchmarks to be searched for contamination are specified in the YAML config
 
 The search results are saved to `outputs/results.csv`.
 
-### 4. Remove contaminated samples
+## 4. Remove contaminated samples
 
 ```bash
-ds remove --huggingface-id <huggingface-id>
+ds remove [--huggingface-id <huggingface-id>]
 ```
 
 The decontaminated dataset is saved to 
@@ -81,7 +92,7 @@ The decontaminated dataset is saved to
 
 --------------------
 
-### Command abbreviations
+# Command abbreviations
 
 - `es` -> `elasticsearch`
 - `ds` -> `datasets`

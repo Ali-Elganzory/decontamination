@@ -901,6 +901,7 @@ def remove(
                 path,
                 ds_config.subset,
                 split=ds_config.split,
+                messages_field=ds_config.messages_field,
             )
             filtered = full_ds.filter(
                 lambda _, idx: idx not in ids_to_remove,
